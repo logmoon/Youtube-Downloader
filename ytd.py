@@ -28,8 +28,8 @@ def download_video(yt, out_path):
     print(f"==Video Information:==\nTitle:{yt.title}\nAuthor:{yt.author}\nViews:{yt.views}")
 
     while (True):
-        choice = input("==Enter:==\n0 To Download Video\n1 To Download Audio\n> ")
-        if (int(choice) == 0 or int(choice) == 1):
+        choice = input("==Enter:==\n0 To Download Video\n1 To Download Audio\n2 To Cancel\n> ")
+        if (int(choice) == 0 or int(choice) == 1 or int(choice) == 2):
             break
 
     print("==Fetching the streams...==")
@@ -40,12 +40,14 @@ def download_video(yt, out_path):
         itag = input("==Enter The itag of the chosen stream:==\n> ")
         print("==Starting Download...==")
         yt.streams.get_by_itag(itag).download(output_path=out_path)
-    else:
+    elif int(choice) == 1:
         for entry in yt.streams.filter(only_audio=True):
             print(entry)
         itag = input("==Enter The itag of the chosen stream:==\n> ")
         print("==Starting Download...==")
         yt.streams.get_by_itag(itag).download(output_path=out_path)
+    else:
+        return
 
 
 def process_video(link, out_path):
