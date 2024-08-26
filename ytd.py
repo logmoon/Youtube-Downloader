@@ -1,9 +1,7 @@
-from pytube import YouTube
-from pytube import Playlist
+from pytubefix import YouTube
+from pytubefix import Playlist
 from sys import argv
-from sys import platform
 import sys
-import os
 
 yt_link = argv[1]
 output_path = argv[2]
