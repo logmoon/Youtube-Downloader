@@ -22,16 +22,15 @@ def complete_func(stream, file_path):
     print(f"Successfully Downloaded in '{file_path}'")
 
 
-
 # Youtube changed a few things making adaptive resolution videos come without audio
 # So we have to first download the video, then the audio, and combine them.
 
-# Code from: https://stackoverflow.com/a/61063349
+# Code adapted from: https://stackoverflow.com/a/61063349
 def combine_video_audio(video_path, audio_path, output_path, fps):
     my_clip = mpe.VideoFileClip(video_path)
     audio_background = mpe.AudioFileClip(audio_path)
     final_clip = my_clip.set_audio(audio_background)
-    final_clip.write_videofile(output_path, fps=fps)
+    final_clip.write_videofile(output_path, threads=4, audio_fps=44100, codec='libx264', audio=True, fps=fps)
 
 def download_video(yt, video_itag, audio_itag, output_path):
     # First, download the video
